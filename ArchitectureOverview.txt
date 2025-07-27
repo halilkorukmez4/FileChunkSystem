@@ -1,0 +1,185 @@
+FileChunkSystem - Teknik Dokümantasyon
+
+1. Mimari Desenler ve Amaçlarý
+
+  1.1 Onion Architecture
+
+	Amaç: Business logic'i external baðýmlýlýklardan izole etmek için:
+	
+	Katmanlar arasý net responsibility separation (Domain/Application/Infrastructure)
+	
+	Testability'yi maksimize etme
+	
+	Bakým ve geliþtirme kolaylýðý
+	
+	Technology agnostic yapý
+
+  1.2 Vertical Slice Architecture
+
+	Amaç: Feature-based organizasyonla:
+	
+	Ýlgili tüm kodun (command/handler/model) single responsibility prensibi
+	
+	Open/Closed principle uyumu
+	
+	High cohesion saðlama
+	
+	Microservice benzeri isolation
+
+  1.3 CQRS (Command Query Responsibility Segregation)
+
+	Amaç: Write ve read operasyonlarýný ayýrarak:
+	
+	Command (state deðiþtiren) ve query'lerin ayrý optimizasyonu
+	
+	Complex modellerden kaçýnma
+	
+	Performance ve scalability iyileþtirmesi
+
+2. Tasarým Desenleri ve Amaçlarý
+
+  2.1 Strategy Pattern
+
+	Amaç: Interchangeable algoritmalar için:
+	
+	Chunking strategy (Fixed/Dynamic/PowerOfTwo)
+	
+	Storage routing (RoundRobin/Random)
+	
+	Runtime'da algorithm deðiþimi
+	
+	Extensibility için açýk yapý
+
+  2.2 Template Method Pattern (ActorBase)
+
+	Amaç: Ortak workflow'u standardize etmek için:
+	
+	Centralized exception handling
+	
+	Pre/post processing merkezi yönetimi
+	
+	Code duplication önleme
+	
+	Customization için abstraction
+
+  2.3 Decorator Pattern
+
+	Amaç: Mevcut nesnelere dinamik olarak:
+	
+	Yeni behavior ekleme (ProviderId tracking)
+	
+	Core functionality'yi deðiþtirmeden extension
+	
+	Class hierarchy karmaþýklýðý olmadan flexibility
+
+  2.4 Scatter-Gather Pattern
+
+	Amaç: Parallel processing performansý için:
+	
+	Büyük task'larý sub-task'lara bölme (Scatter)
+	
+	Result aggregation (Gather)
+	
+	Resource utilization optimizasyonu
+	
+	Fault tolerance artýrma
+
+3. C# Teknikleri ve Amaçlarý
+
+  3.1 IAsyncEnumerable
+
+	Amaç: Büyük dosyalarý streaming olarak iþlemek için:
+	
+	Memory'de full file tutmadan chunking
+	
+	"yield return" ile lazy evaluation
+	
+	Async stream pipeline verimliliði
+	
+	GC pressure azaltma
+
+  3.2 ArrayPool<T>
+
+	Amaç: Memory management optimizasyonu için:
+	
+	Byte buffer reuse
+	
+	GC overhead azaltma
+	
+	Large Object Heap (LOH) allocation önleme
+	
+	Performance-critical senaryolarda hýz artýþý
+
+  3.3 Dependency Injection
+
+	Amaç: Loose coupling için:
+	
+	Class'lar arasý gevþek baðlantý
+	
+	Unit test'te mocking kolaylýðý
+	
+	Runtime implementasyon deðiþimi
+	
+	Lifetime management (scoped/transient/singleton)
+
+  3.4 System.IO.Pipelines
+
+	Amaç: High-performance I/O için:
+	
+	Producer/consumer modelinde efficient data flow
+	
+	Memory copy maliyeti minimizasyonu
+	
+	Async I/O optimizasyonu
+	
+	Backpressure management
+
+4. Performance Optimization Tercihleri ve Amaçlarý
+
+  4.1 Parallel Processing (Coordinator)
+
+	Amaç: Multi-core sistemlerden faydalanmak için:
+	
+	Chunk'larýn parallel processing'i
+	
+	I/O bound operasyonlarda latency reduction
+	
+	Resource utilization balancing
+	
+	Job completion time azaltma
+
+  4.2 Memory Pooling (ArrayPool)
+
+	Amaç: Memory management optimizasyonu için:
+	
+	Continuous allocation/deallocation cost reduction
+	
+	GC pause minimization
+	
+	Large Object Heap (LOH) fragmentation önleme
+	
+	High-performance memory access
+
+  4.3 Isolated Dependency Scopes
+
+	Amaç: Multi-thread güvenlik için:
+	
+	Per-actor özel DbContext instance
+	
+	Thread collision prevention
+	
+	Resource leak engelleme
+	
+	Transaction management kolaylýðý
+
+  4.4 Stream-based Data Processing
+
+	Amaç: Büyük dosyalarý efficient iþlemek için:
+	
+	Full file memory loading önleme
+	
+	On-the-fly data processing
+	
+	Pipeline modeliyle latency reduction
+	
+	Memory consumption'u sabit tutma
