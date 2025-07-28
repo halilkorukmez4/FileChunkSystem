@@ -21,7 +21,7 @@ public sealed class Sha256ChecksumService : IChecksumService
 
         using var sha = SHA256.Create();
 
-        byte[] hash = await sha.ComputeHashAsync(stream, cancellationToken).ConfigureAwait(false);
+        byte[] hash = await sha.ComputeHashAsync(stream, cancellationToken);
 
         if (stream.CanSeek) stream.Position = 0;
 
