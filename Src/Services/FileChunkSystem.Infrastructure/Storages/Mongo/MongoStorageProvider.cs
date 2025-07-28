@@ -11,7 +11,7 @@ public sealed class MongoStorageProvider(IGridFSBucket bucket) : IStorageProvide
 {
     public string ProviderId => StorageProviderTypes.MongoDb;
 
-    public async Task<string> StoreChunkAsync(ChunkEntry chunk, Stream chunkData, CancellationToken ct = default)
+    public async Task<string> WriteChunkAsync(ChunkEntry chunk, Stream chunkData, CancellationToken ct = default)
     {
         var fileName = $"chunk_{chunk.Id}";
 
@@ -20,7 +20,7 @@ public sealed class MongoStorageProvider(IGridFSBucket bucket) : IStorageProvide
         return objectId.ToString();
     }
 
-    public async Task<Stream> RetrieveChunkAsync(ChunkEntry chunk, CancellationToken ct = default)
+    public async Task<Stream> ReadChunkAsync(ChunkEntry chunk, CancellationToken ct = default)
     {
         if (string.IsNullOrWhiteSpace(chunk.StorageHandle))
             throw new($"StorageHandle is missing for chunk {chunk.Id}");

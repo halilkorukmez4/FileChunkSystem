@@ -18,7 +18,7 @@ public sealed class FileSystemStorageProvider : IStorageProvider
         Directory.CreateDirectory(_rootDirectory);
     }
 
-    public async Task<string> StoreChunkAsync(ChunkEntry chunk, Stream chunkData, CancellationToken cancellationToken = default)
+    public async Task<string> WriteChunkAsync(ChunkEntry chunk, Stream chunkData, CancellationToken cancellationToken = default)
     {
         var subFolder = Path.Combine(_rootDirectory, chunk.FileEntryId.ToString("N"));
 
@@ -37,7 +37,7 @@ public sealed class FileSystemStorageProvider : IStorageProvider
         return Path.GetRelativePath(_rootDirectory, fullPath);
     }
 
-    public async Task<Stream> RetrieveChunkAsync(ChunkEntry chunk, CancellationToken cancellationToken = default)
+    public async Task<Stream> ReadChunkAsync(ChunkEntry chunk, CancellationToken cancellationToken = default)
     {
         var fullPath = Path.Combine(_rootDirectory, chunk.StorageHandle ?? string.Empty);
 

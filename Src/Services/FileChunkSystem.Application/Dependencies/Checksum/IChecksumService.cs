@@ -3,5 +3,5 @@
 public interface IChecksumService
 {
     string ComputeChecksum(ReadOnlySpan<byte> data);
-    Task<string> ComputeChecksumAsync(Stream stream, CancellationToken ct = default);
+    Task<string> ComputeChecksumAsync(Stream stream, CancellationToken cancellationToken = default);
 }

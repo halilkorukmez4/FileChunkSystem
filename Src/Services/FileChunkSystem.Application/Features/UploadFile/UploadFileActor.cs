@@ -45,7 +45,7 @@ public sealed class UploadFileActor(IFileService fileService, IChunkService chun
             };
 
             await using MemoryStream stream = new(chunk.Buffer, 0, chunk.Size, writable: false);
-            chunkEntry.StorageHandle = await resolvedProvider.StoreChunkAsync(chunkEntry, stream, cancellationToken);
+            chunkEntry.StorageHandle = await resolvedProvider.WriteChunkAsync(chunkEntry, stream, cancellationToken);
             chunkEntries.Add(chunkEntry);
             totalSize += chunk.Size;
         }

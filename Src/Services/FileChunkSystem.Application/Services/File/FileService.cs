@@ -76,7 +76,7 @@ public sealed class FileService(IFileRepository fileRepository, IStorageProvider
 
                     var provider = storageProvider.Use(chunk.StorageProviderId);
 
-                    await using var chunkStream = await provider.RetrieveChunkAsync(chunk, cancellationToken);
+                    await using var chunkStream = await provider.ReadChunkAsync(chunk, cancellationToken);
 
                     if (chunkStream == null || !chunkStream.CanRead)
                         throw new($"Chunk {chunk.Id} stream is not readable.");
