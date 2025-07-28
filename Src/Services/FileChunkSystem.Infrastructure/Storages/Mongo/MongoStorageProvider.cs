@@ -11,16 +11,16 @@ public sealed class MongoStorageProvider(IGridFSBucket bucket) : IStorageProvide
 {
     public string ProviderId => StorageProviderTypes.MongoDb;
 
-    public async Task<string> WriteChunkAsync(ChunkEntry chunk, Stream chunkData, CancellationToken ct = default)
+    public async Task<string> WriteChunkAsync(ChunkEntry chunk, Stream chunkData, CancellationToken cancellationToken = default)
     {
         var fileName = $"chunk_{chunk.Id}";
 
-        var objectId = await bucket.UploadFromStreamAsync(fileName, chunkData, cancellationToken: ct);
+        var objectId = await bucket.UploadFromStreamAsync(fileName, chunkData, cancellationToken: cancellationToken);
 
         return objectId.ToString();
     }
 
-    public async Task<Stream> ReadChunkAsync(ChunkEntry chunk, CancellationToken ct = default)
+    public async Task<Stream> ReadChunkAsync(ChunkEntry chunk, CancellationToken cancellationToken = default)
     {
         if (string.IsNullOrWhiteSpace(chunk.StorageHandle))
             throw new($"StorageHandle is missing for chunk {chunk.Id}");
@@ -30,7 +30,7 @@ public sealed class MongoStorageProvider(IGridFSBucket bucket) : IStorageProvide
 
         MemoryStream stream = new((int)chunk.Size);
 
-        await bucket.DownloadToStreamAsync(objectId, stream, cancellationToken: ct);
+        await bucket.DownloadToStreamAsync(objectId, stream, cancellationToken: cancellationToken);
 
         stream.Position = 0;
 
@@ -40,11 +40,11 @@ public sealed class MongoStorageProvider(IGridFSBucket bucket) : IStorageProvide
         return stream;
     }
 
-    public async Task<bool> HealthCheckAsync(CancellationToken ct = default)
+    public async Task<bool> HealthCheckAsync(CancellationToken cancellationToken = default)
     {
-        var collections = await bucket.Database.ListCollectionNamesAsync(cancellationToken: ct);
+        var collections = await bucket.Database.ListCollectionNamesAsync(cancellationToken: cancellationToken);
 
-        await collections.AnyAsync(ct);
+        await collections.AnyAsync(cancellationToken);
 
         return true;
     }
