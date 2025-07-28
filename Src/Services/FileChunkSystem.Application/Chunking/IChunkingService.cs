@@ -1,6 +1,6 @@
 ﻿using FileChunkSystem.Application.Dtos;
 
-namespace FileChunkSystem.Application.Dependencies.Chunking;
+namespace FileChunkSystem.Application.Chunking;
 
 public interface IChunkingService
 {

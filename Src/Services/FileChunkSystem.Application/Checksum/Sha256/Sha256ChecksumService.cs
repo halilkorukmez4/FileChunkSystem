@@ -1,6 +1,7 @@
-﻿using System.Security.Cryptography;
+﻿using FileChunkSystem.Application.Checksum;
+using System.Security.Cryptography;
 
-namespace FileChunkSystem.Application.Dependencies.Checksum.Sha256;
+namespace FileChunkSystem.Application.Checksum.Sha256;
 
 public sealed class Sha256ChecksumService : IChecksumService
 {

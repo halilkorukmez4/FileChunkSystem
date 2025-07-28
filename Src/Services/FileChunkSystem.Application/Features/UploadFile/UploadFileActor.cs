@@ -1,7 +1,7 @@
 ﻿using FileChunkSystem.Application.Abstractions.Storages;
+using FileChunkSystem.Application.Checksum;
+using FileChunkSystem.Application.Chunking;
 using FileChunkSystem.Application.Coordinators;
-using FileChunkSystem.Application.Dependencies.Checksum;
-using FileChunkSystem.Application.Dependencies.Chunking;
 using FileChunkSystem.Application.Dtos;
 using FileChunkSystem.Application.Services.Chunk;
 using FileChunkSystem.Application.Services.File;

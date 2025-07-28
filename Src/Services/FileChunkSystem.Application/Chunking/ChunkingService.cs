@@ -1,10 +1,10 @@
-﻿using FileChunkSystem.Application.Dependencies.Checksum;
+﻿using FileChunkSystem.Application.Checksum;
 using FileChunkSystem.Application.Dtos;
 using FileChunkSystem.Application.Helpers.Strategies;
 using System.Buffers;
 using System.Runtime.CompilerServices;
 
-namespace FileChunkSystem.Application.Dependencies.Chunking;
+namespace FileChunkSystem.Application.Chunking;
 
 public sealed class ChunkingService(IChecksumService checksumService) : IChunkingService
 {

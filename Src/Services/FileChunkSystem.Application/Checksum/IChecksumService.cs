@@ -1,4 +1,4 @@
-﻿namespace FileChunkSystem.Application.Dependencies.Checksum;
+﻿namespace FileChunkSystem.Application.Checksum;
 
 public interface IChecksumService
 {

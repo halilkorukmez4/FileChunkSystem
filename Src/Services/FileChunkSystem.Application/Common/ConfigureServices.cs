@@ -1,10 +1,10 @@
 ﻿using FastExpressionCompiler;
 using FileChunkSystem.Application.Abstractions.Actors;
 using FileChunkSystem.Application.Abstractions.Coordinators;
+using FileChunkSystem.Application.Checksum;
+using FileChunkSystem.Application.Checksum.Sha256;
+using FileChunkSystem.Application.Chunking;
 using FileChunkSystem.Application.Coordinators;
-using FileChunkSystem.Application.Dependencies.Checksum;
-using FileChunkSystem.Application.Dependencies.Checksum.Sha256;
-using FileChunkSystem.Application.Dependencies.Chunking;
 using FileChunkSystem.Application.Dtos;
 using FileChunkSystem.Application.Features.MergeFile;
 using FileChunkSystem.Application.Features.UploadFile;
